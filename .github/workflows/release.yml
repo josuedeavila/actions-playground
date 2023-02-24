@@ -25,12 +25,10 @@ jobs:
           git config --local user.email "josue.rosadeavila@gmail.com"
           git config --local user.name "josuerosadeavila"
 
-      - name: print envs
+      - name: Print Envs
         run: |
-          echo ${{ new_version }}
           echo ${{ current_version }}
          
-
       - name: Bump Version
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
