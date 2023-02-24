@@ -23,4 +23,10 @@ jobs:
       - name: Bump Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bumpversion --current-version 1.0.0 minor 
+        run: bumpversion --current-version 1.0.0 minor
+
+      -name: Push Tags
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tags: true
