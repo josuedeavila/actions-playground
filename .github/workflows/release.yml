@@ -27,7 +27,7 @@ jobs:
 
       - name: Bump Version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
         run: bumpversion --current-version 1.0.0 minor
 
       - name: Push Tags
