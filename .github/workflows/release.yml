@@ -28,7 +28,10 @@ jobs:
       - name: Bump Version
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        run: bumpversion --current-version 1.0.0 minor
+        run: bumpversion --current-version {{ current_version }} minor
+
+      - name: Create tag
+        run: git tag v{{ new_version }}
 
       - name: Push Tags
         uses: ad-m/github-push-action@master
