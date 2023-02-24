@@ -23,4 +23,4 @@ jobs:
       - name: Bump Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bumpversion minor --commit --tag --new-version
+        run: bumpversion --commit --tag --new-version
