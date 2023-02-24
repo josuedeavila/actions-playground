@@ -20,6 +20,11 @@ jobs:
       - name: Install Dependencies
         run: pip install bumpversion
 
+      - name: Set Git identity
+        run: |
+          git config --local user.email "josue.rosadeavila@gmail.com"
+          git config --local user.name "josuerosadeavila"
+
       - name: Bump Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
