@@ -5,22 +5,26 @@ on:
     branches:
       - main
 
+inputs:
+  version:
+    description: >
+      Chhose version:
+    required: true
+    default: 'minor'
+    options:
+      patch:
+        description: Bump version patch
+        value: patch
+      minor:
+        description: Bump version minor
+        value: minor
+      major:
+        description: Bump version major
+        value: major
+
 jobs:
-  choose_version:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Choose version
-        id: choose_version
-        run: |
-          echo "Which version do you want to use?"
-          read -p "Enter version (major.minor.patch): " version
-          echo "::set-output name=version::$version)"
-  
   release:
-    needs: [choose_version]
     runs-on: ubuntu-latest
-    env:
-      VERSION: ${{needs.choose_version.outputs.version}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -43,7 +47,7 @@ jobs:
           then
             new_version=1.0.0
           else
-            new_version=$(bumpversion --current-version $current_version $VERSION --list | grep new_version= | sed 's/^new_version=//')
+            new_version=$(bumpversion --current-version $current_version ${{ inputs.version }}" --list | grep new_version= | sed 's/^new_version=//')
           fi
           git tag v$new_version
 
