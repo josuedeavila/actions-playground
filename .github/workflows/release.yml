@@ -28,19 +28,19 @@ jobs:
       - name: Print Current Version
         run: |
           git fetch --tags
-          current_version=$(git describe --tags `git rev-list --tags --max-count=1`)
+          current_version=$(git describe --tags --match 'v*' `git rev-list --tags --max-count=1` | sed 's/^v//')
           echo $current_version
          
       - name: Bump Version
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        run: bumpversion --current-version {{ current_version }} minor
+        run: bumpversion --current-version $current_version minor
 
       - name: Print New Version
-        run: echo {{ new_version }}
+        run: echo $new_version
 
       - name: Create tag
-        run: git tag v{{ new_version }}
+        run: git tag v$new_version
 
       - name: Push Tags
         uses: ad-m/github-push-action@master
