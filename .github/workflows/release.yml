@@ -12,11 +12,13 @@ jobs:
       - name: Choose version
         id: choose_version
         run: |
-          echo "Which version do you want to use?"
-          echo "::set-output name=version::$(read -p "Enter version (major.minor.patch): " version && echo $version)"
+         run: |
+          echo "Which version number do you want to bump?"
+          read -p "Enter 'major', 'minor', or 'patch': " version_bump
+          echo "::set-output name=bump::$version_bump"
   
   release:
-    needs: choose_version
+    needs: [choose_version]
     runs-on: ubuntu-latest
     env:
       VERSION: ${{needs.choose_version.outputs.version}}
