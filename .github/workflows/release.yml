@@ -26,8 +26,12 @@ jobs:
         run: |
           git fetch --tags
           current_version=$(git describe --tags --match 'v*' `git rev-list --tags --max-count=1` | sed 's/^v//')
-          echo $current_version
-          new_version=$(bumpversion --current-version $current_version minor --list | grep new_version= | sed 's/^new_version=//')
+          if [ -z "$new_version" ]
+          then
+            new_version=1.0.0
+          else
+            new_version=$(bumpversion --current-version $current_version minor --list | grep new_version= | sed 's/^new_version=//')
+          fi
           git tag v$new_version
 
       - name: Push Tags
