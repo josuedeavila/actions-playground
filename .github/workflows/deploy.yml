@@ -3,11 +3,14 @@ name: Deploy
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
-  my_job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: deplpoyzinho
-        run: echo "Deploy done!"
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Display the tag that triggered the workflow
+        run: |
+          echo "Tag that triggered the workflow: ${GITHUB_REF#refs/tags/}"
