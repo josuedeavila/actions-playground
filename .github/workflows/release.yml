@@ -1,25 +1,23 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
-  inputs:
-    version:
-      description: >
-        Chhose version:
-      required: true
-      default: 'minor'
-      options:
-        patch:
-          description: Bump version patch
-          value: patch
-        minor:
-          description: Bump version minor
-          value: minor
-        major:
-          description: Bump version major
-          value: major
+  workflow_dispatch
+    inputs:
+      version:
+        description: >
+          Chhose version:
+        required: true
+        default: 'minor'
+        options:
+          patch:
+            description: Bump version patch
+            value: patch
+          minor:
+            description: Bump version minor
+            value: minor
+          major:
+            description: Bump version major
+            value: major
 
 jobs:
   release:
