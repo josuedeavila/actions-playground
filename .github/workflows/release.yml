@@ -34,7 +34,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git fetch --tags
-          current_version=$(git tag -l "v*" | awk -F. '$1 > max { max = $1; latest = $0 } END { print latest }'| sed 's/^v//')
+          current_version=$(git tag -l "v*" | sort -V | tail -n1 | sed 's/^v//')
           if [ -z "$current_version" ]
           then
             new_version=1.0.0
