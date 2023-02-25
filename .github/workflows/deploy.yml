@@ -1,0 +1,13 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  my_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deplpoyzinho
+        run: echo "Deploy done!"
