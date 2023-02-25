@@ -27,7 +27,7 @@ jobs:
 
       - name: Print Current Version
         run: |
-          current_version = git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/josuerosadeavila/actions-playground.git $NAME/v* | tail -n 1 | cut --delimiter='/' --fields=4 > current_version
+          current_version: git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/josuerosadeavila/actions-playground.git $NAME/v* | tail -n 1 | cut --delimiter='/' --fields=4 > current_version
           echo ${{ current_version }}
          
       - name: Bump Version
