@@ -27,7 +27,7 @@ jobs:
 
       - name: Print Current Version
         run: |
-          git pull
+          git fetch --tags
           current_version=$(git describe --tags `git rev-list --tags --max-count=1`)
           echo $current_version
          
