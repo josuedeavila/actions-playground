@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
- choose_version:
+  choose_version:
     runs-on: ubuntu-latest
     steps:
       - name: Choose version
