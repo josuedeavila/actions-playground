@@ -5,19 +5,14 @@ on:
     inputs:
       version:
         description: >
-          Chhose version:
+          Choose version:
         required: true
         default: 'minor'
+        type: choice
         options:
-          patch:
-            description: Bump version patch
-            value: patch
-          minor:
-            description: Bump version minor
-            value: minor
-          major:
-            description: Bump version major
-            value: major
+          - patch
+          - minor
+          - major
 
 jobs:
   release:
