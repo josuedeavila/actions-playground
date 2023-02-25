@@ -35,8 +35,6 @@ jobs:
         run: |
           git fetch --tags
           current_version=$(git tag -l "v*" | awk -F. '$1 > max { max = $1; latest = $0 } END { print latest }'| sed 's/^v//')
-          echo ${{ inputs.version }}
-          echo $current_version
           if [ -z "$current_version" ]
           then
             new_version=1.0.0
