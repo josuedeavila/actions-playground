@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  choose_version:
+ choose_version:
     runs-on: ubuntu-latest
     steps:
       - name: Choose version
@@ -14,25 +14,13 @@ jobs:
         run: |
           echo "Which version do you want to use?"
           read -p "Enter version (major.minor.patch): " version
-          echo "::set-output name=version::$version"
-
-      - name: Choose version bump
-        id: choose_bump
-        run: |
-          echo "Which version number do you want to bump?"
-          select version_bump in "major" "minor" "patch"; do
-            case $version_bump in
-              major|minor|patch ) echo "::set-output name=bump::$version_bump"; break;;
-              * ) echo "Invalid option";;
-            esac
-          done
+          echo "::set-output name=version::$version)"
   
   release:
     needs: [choose_version]
     runs-on: ubuntu-latest
     env:
       VERSION: ${{needs.choose_version.outputs.version}}
-      BUMP: ${{needs.choose_bump.outputs.bump}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -55,7 +43,7 @@ jobs:
           then
             new_version=1.0.0
           else
-            new_version=$(bumpversion --current-version $current_version $BUMP --list | grep new_version= | sed 's/^new_version=//')
+            new_version=$(bumpversion --current-version $current_version $VERSION --list | grep new_version= | sed 's/^new_version=//')
           fi
           git tag v$new_version
 
