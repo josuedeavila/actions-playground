@@ -32,4 +32,16 @@ jobs:
           git fetch --tags
           current_version=$(git describe --tags --match 'v*' `git rev-list --tags --max-count=1` | sed 's/^v//')
           echo $current_version
-          bumpversion --current-version $current_version minor
+          new_version=$(bumpversion --current-version $current_version minor --list | grep new_version= | sed 's/^new_version=//')
+
+      - name: Print New Version
+        run: echo $new_version
+
+      - name: Create tag
+        run: git tag v$new_version
+
+      - name: Push Tags
+        uses: ad-m/github-push-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tags: true
