@@ -6,8 +6,20 @@ on:
       - main
 
 jobs:
-  release:
+  choose_version:
     runs-on: ubuntu-latest
+    steps:
+      - name: Choose version
+        id: choose_version
+        run: |
+          echo "Which version do you want to use?"
+          echo "::set-output name=version::$(read -p "Enter version (major.minor.patch): " version && echo $version)"
+  
+  release:
+    needs: choose_version
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{needs.choose_version.outputs.version}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -30,7 +42,7 @@ jobs:
           then
             new_version=1.0.0
           else
-            new_version=$(bumpversion --current-version $current_version minor --list | grep new_version= | sed 's/^new_version=//')
+            new_version=$(bumpversion --current-version $current_version $VERSION --list | grep new_version= | sed 's/^new_version=//')
           fi
           git tag v$new_version
 
