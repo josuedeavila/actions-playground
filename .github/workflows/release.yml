@@ -41,7 +41,7 @@ jobs:
           then
             new_version=1.0.0
           else
-            new_version=$(bumpversion --current-version $current_version ${{ inputs.version }}" --list | grep new_version= | sed 's/^new_version=//')
+            new_version=$(bumpversion --current-version $current_version ${{ inputs.version }} --list | grep new_version= | sed 's/^new_version=//')
           fi
           git tag v$new_version
 
