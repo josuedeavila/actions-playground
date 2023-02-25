@@ -26,7 +26,7 @@ jobs:
         run: |
           git fetch --tags
           current_version=$(git describe --tags --match 'v*' `git rev-list --tags --max-count=1` | sed 's/^v//')
-          if [ -z "$new_version" ]
+          if [ -z "$current_version" ]
           then
             new_version=1.0.0
           else
