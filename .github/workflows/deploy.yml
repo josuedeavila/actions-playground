@@ -13,4 +13,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Display the tag that triggered the workflow
         run: |
-          echo "Tag that triggered the workflow: ${GITHUB_REF#refs/tags/}"
+          tag = "${GITHUB_REF#refs/tags/}"
+          echo "Tag that triggered the workflow: $tag"
