@@ -48,5 +48,5 @@ jobs:
       - name: Push Tags
         uses: ad-m/github-push-action@master
         with:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_USER }}
+          github_token: ${{ secrets.ACTIONS_USER }}
           tags: true
