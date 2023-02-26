@@ -5,11 +5,12 @@ on:
     tags:
     - '**'
 
+env:
+  TAG_NAME: ${{GITHUB_REF#refs/tags/}}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      TAG_NAME: ${{GITHUB_REF#refs/tags/}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
