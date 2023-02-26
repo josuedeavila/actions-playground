@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.ACTIONS_USER }}
+          token: '${{ secrets.ACTIONS_USER }}'
           persist-credentials: false
 
       - name: Setup Python
@@ -47,5 +47,5 @@ jobs:
       - name: Push Tags
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.ACTIONS_USER }}
+          github_token: '${{ secrets.ACTIONS_USER }}'
           tags: true
