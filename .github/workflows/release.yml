@@ -33,7 +33,7 @@ jobs:
          
       - name: Bump Version
         env:
-          github_token: ${{ secrets.ACTIONS_USER }}
+          github_token: "foo"
         run: |
           git fetch --tags
           current_version=$(git tag -l "v*" | sort -V | tail -n1 | sed 's/^v//')
