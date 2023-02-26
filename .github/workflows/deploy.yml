@@ -3,16 +3,16 @@ name: Deploy
 on:
   push:
     tags:
-      - "v*"
+    - '**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TAG_NAME: ${{GITHUB_REF#refs/tags/}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Display the tag that triggered the workflow
         run: |
-          TAG='${{ GITHUB_REF#refs/tags/ }}'
-          echo "Tag: $TAG"
-          echo "Tag that triggered the workflow: ${GITHUB_REF#refs/tags/}"
+          echo "Tag that triggered the workflow: $TAG_NAME"
