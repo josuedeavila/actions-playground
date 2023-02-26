@@ -6,7 +6,7 @@ on:
     - '**'
 
 env:
-  TAG_NAME: ${{GITHUB_REF#refs/tags/}}
+  TAG_NAME: ${GITHUB_REF#refs/tags/}
 
 jobs:
   build:
